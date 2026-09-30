@@ -1,0 +1,92 @@
+<main class="body-container">
+  <!-- Alerta flotante de retroalimentación -->
+  <div *ngIf="mensajeAlerta" [ngClass]="alertaExitoso ? 'alert-success' : 'alert-error'" class="alert">
+    {{ mensajeAlerta }}
+  </div>
+
+  <div class="grid-layout">
+    <!-- Formulario Registro con DNI -->
+    <section class="section-card form-card">
+      <h3>Registrar Nuevo Colaborador</h3>
+      <form (submit)="registrarNuevoTrabajador(); $event.preventDefault()">
+        <div class="form-group">
+          <label>DNI (8 dígitos):</label>
+          <input type="text" [(ngModel)]="nuevoDni" name="dni" placeholder="Ej. 74125896" maxlength="8" required>
+        </div>
+        <div class="form-group">
+          <label>Nombre Completo:</label>
+          <input type="text" [(ngModel)]="nuevoNombre" name="nombre" placeholder="Ej. Ana Pérez" required>
+        </div>
+        <div class="form-group">
+          <label>Cargo / Puesto:</label>
+          <input type="text" [(ngModel)]="nuevoCargo" name="cargo" placeholder="Ej. Diseñadora UX" required>
+        </div>
+        <button type="submit" class="btn-primary">Guardar Colaborador</button>
+      </form>
+    </section>
+
+    <!-- Directorio con Búsqueda Instantánea por DNI o Nombre -->
+    <section class="section-card list-card">
+      <div class="header-list">
+        <h3> Directorio de Personal</h3>
+        <div class="search-box">
+          <input type="text" [(ngModel)]="filtroTexto" placeholder="🔍 Buscar por DNI o Nombre...">
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="styled-table">
+          <thead>
+            <tr>
+              <th>DNI</th>
+              <th>Colaborador</th>
+              <th>Cargo</th>
+              <th>Acción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let emp of empleadosFiltrados">
+              <td><span class="badge-dni">{{ emp.dni }}</span></td>
+              <td class="font-bold">{{ emp.nombre }}</td>
+              <td>{{ emp.cargo }}</td>
+              <td>
+                <button class="btn-asistencia" (click)="registrarAsistencia(emp.id)">Marcar Asistencia</button>
+              </td>
+            </tr>
+            <tr *ngIf="empleadosFiltrados.length === 0">
+              <td colspan="4" class="no-data">No se encontraron resultados para la búsqueda.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <!-- Tabla de Control de Asistencias -->
+  <section class="section-card full-width">
+    <h3> Registro de Asistencias del Día</h3>
+    <div class="table-responsive">
+      <table class="styled-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Colaborador</th>
+            <th>Fecha</th>
+            <th>Hora Exacta</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let asist of asistencias">
+            <td>#{{ asist.idEmpleado }}</td>
+            <td class="font-bold">{{ asist.nombre }}</td>
+            <td>{{ asist.fecha }}</td>
+            <td><span class="badge-time">{{ asist.hora }}</span></td>
+          </tr>
+          <tr *ngIf="asistencias.length === 0">
+            <td colspan="4" class="no-data">Aún no hay asistencias marcadas en esta sesión.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>

@@ -1,0 +1,21 @@
+.header-container {
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 2.5rem;
+  border-radius: 12px 12px 0 0;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
+}
+.logo-area { display: flex; align-items: center; gap: 15px; }
+.empresa-logo { width: 45px; height: 45px; object-fit: contain; background: rgba(255,255,255,0.2); padding: 6px; border-radius: 10px; }
+.titles h2 { margin: 0; font-size: 1.4rem; font-weight: 800; }
+.titles p { margin: 2px 0 0 0; font-size: 0.82rem; color: #e0e7ff; }
+.badge-live { display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.15); padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; }
+.pulsing-dot { width: 9px; height: 9px; background-color: #34d399; border-radius: 50%; box-shadow: 0 0 8px #34d399; animation: pulse 1.5s infinite; }
+@keyframes pulse {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(52, 211, 153, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); }
+}
